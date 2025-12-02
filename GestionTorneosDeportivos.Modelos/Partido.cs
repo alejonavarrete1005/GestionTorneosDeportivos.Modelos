@@ -12,18 +12,18 @@ namespace GestionTorneosDeportivos.Modelos
         [Key] public int Id { get; set; }
 
         public int TorneoId { get; set; }
-        public Torneo Torneo { get; set; }
+        public Torneo? Torneo { get; set; }
 
         public string Fase { get; set; } // Grupos, Cuartos, Semis, Final
         public DateTime Fecha { get; set; }
-        public string Estado { get; set; } // Programado, Jugado
+        public bool Jugado { get; set; } 
 
         // Fk
         public int EquipoLocalId { get; set; }
-        public Equipo EquipoLocal { get; set; }
+        public Equipo? EquipoLocal { get; set; }
 
         public int EquipoVisitanteId { get; set; }
-        public Equipo EquipoVisitante { get; set; }
+        public Equipo? EquipoVisitante { get; set; }
 
         // Resultado
         public int GolesLocal { get; set; }
@@ -31,9 +31,9 @@ namespace GestionTorneosDeportivos.Modelos
 
         // Ganador en eliminación directa
         public int? GanadorId { get; set; }
-        public Equipo Ganador { get; set; }
+        public Equipo? Ganador { get; set; }
 
         //Navegacion
-        public List<EventoPartido> Eventos { get; set; } 
+        public List<EventoPartido>? Eventos { get; set; } 
     }
 }

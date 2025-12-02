@@ -15,7 +15,7 @@ namespace GestionTorneosDeportivos.Modelos
         
 
         // Navegacion
-        public List<TorneoEquipo> Torneos { get; set; } 
-        public List<Jugador> Jugadores { get; set; } 
+        public List<TorneoEquipo>? Torneos { get; set; } 
+        public List<Jugador>? Jugadores { get; set; } 
     }
 }

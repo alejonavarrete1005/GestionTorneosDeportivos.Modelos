@@ -12,7 +12,7 @@ namespace GestionTorneosDeportivos.Modelos
         public string Estado { get; set; } // Pendiente, EnCurso, Finalizado
 
         // Navegacion
-        public List<TorneoEquipo> TorneoEquipos { get; set; } 
-        public List<Partido> Partidos { get; set; } 
+        public List<TorneoEquipo>? TorneoEquipos { get; set; } 
+        public List<Partido>? Partidos { get; set; } 
     }
 }

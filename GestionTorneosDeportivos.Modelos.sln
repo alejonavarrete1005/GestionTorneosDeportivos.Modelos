@@ -7,6 +7,8 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "GestionTorneosDeportivos.Mo
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "GestionTorneos.API", "GestionTorneos.API\GestionTorneos.API.csproj", "{BC6D2148-A9D0-4D0E-AAD6-E8F83CFC7440}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "GestionTorneos.ApiTest", "GestionTorneos.ApiTest\GestionTorneos.ApiTest.csproj", "{E3422561-0E1B-4B53-A8E6-B7FCDE6A03B4}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -21,6 +23,10 @@ Global
 		{BC6D2148-A9D0-4D0E-AAD6-E8F83CFC7440}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{BC6D2148-A9D0-4D0E-AAD6-E8F83CFC7440}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{BC6D2148-A9D0-4D0E-AAD6-E8F83CFC7440}.Release|Any CPU.Build.0 = Release|Any CPU
+		{E3422561-0E1B-4B53-A8E6-B7FCDE6A03B4}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{E3422561-0E1B-4B53-A8E6-B7FCDE6A03B4}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{E3422561-0E1B-4B53-A8E6-B7FCDE6A03B4}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{E3422561-0E1B-4B53-A8E6-B7FCDE6A03B4}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE

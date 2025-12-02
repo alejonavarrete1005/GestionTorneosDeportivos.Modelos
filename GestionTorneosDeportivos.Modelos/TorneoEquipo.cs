@@ -16,8 +16,8 @@ namespace GestionTorneosDeportivos.Modelos
         public int EquipoId { get; set; }
 
         //Navegacion
-        public Torneo Torneo { get; set; }
-        public Equipo Equipo { get; set; }
+        public Torneo? Torneo { get; set; }
+        public Equipo? Equipo { get; set; }
 
         // Estadísticas
         public string Grupo { get; set; } // A, B, C, D

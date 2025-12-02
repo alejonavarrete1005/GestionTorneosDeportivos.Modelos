@@ -24,6 +24,15 @@ namespace GestionTorneos.API
             builder.Services.AddEndpointsApiExplorer();
             builder.Services.AddSwaggerGen();
 
+            //Configure JSON options
+            builder.Services
+                .AddControllers()
+                .AddNewtonsoftJson(
+                options =>
+                options.SerializerSettings.ReferenceLoopHandling
+                = Newtonsoft.Json.ReferenceLoopHandling.Ignore
+                );
+
             var app = builder.Build();
 
             // Configure the HTTP request pipeline.

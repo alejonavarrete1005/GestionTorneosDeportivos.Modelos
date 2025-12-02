@@ -11,47 +11,60 @@ namespace GestionTorneos.API.Controllers
 {
     [Route("api/[controller]")]
     [ApiController]
-    public class TorneosEquiposController : ControllerBase
+    public class TorneoEquipoController : ControllerBase
     {
         private readonly GestionTorneosAPIContext _context;
 
-        public TorneosEquiposController(GestionTorneosAPIContext context)
+        public TorneoEquipoController(GestionTorneosAPIContext context)
         {
             _context = context;
         }
 
-        // GET: api/TorneosEquipos
         [HttpGet]
-        public async Task<ActionResult<IEnumerable<TorneoEquipo>>> GetTorneoEquipo()
+        public async Task<ActionResult<IEnumerable<TorneoEquipo>>> GetTorneoEquipos()
         {
-            return await _context.TorneosEquipos.ToListAsync();
+            return await _context
+                .TorneosEquipos
+                .Include(te => te.Torneo)
+                .Include(te => te.Equipo)
+                .ToListAsync();
         }
 
-        // GET: api/TorneosEquipos/5
         [HttpGet("{id}")]
         public async Task<ActionResult<TorneoEquipo>> GetTorneoEquipo(int id)
         {
-            var torneoEquipo = await _context.TorneosEquipos.FindAsync(id);
+            var te = await _context
+                .TorneosEquipos
+                .Include(x => x.Torneo)
+                .Include(x => x.Equipo)
+                .Where(x => x.Id == id)
+                .FirstOrDefaultAsync();
 
-            if (torneoEquipo == null)
-            {
+            if (te == null)
                 return NotFound();
-            }
 
-            return torneoEquipo;
+            return te;
         }
 
-        // PUT: api/TorneosEquipos/5
-        // To protect from overposting attacks, see https://go.microsoft.com/fwlink/?linkid=2123754
-        [HttpPut("{id}")]
-        public async Task<IActionResult> PutTorneoEquipo(int id, TorneoEquipo torneoEquipo)
+        [HttpPost]
+        public async Task<ActionResult<TorneoEquipo>> PostTorneoEquipo(TorneoEquipo te)
         {
-            if (id != torneoEquipo.Id)
-            {
-                return BadRequest();
-            }
+            _context.TorneosEquipos.Add(te);
+            await _context.SaveChangesAsync();
 
-            _context.Entry(torneoEquipo).State = EntityState.Modified;
+            te.Torneo = await _context.Torneos.FindAsync(te.TorneoId);
+            te.Equipo = await _context.Equipos.FindAsync(te.EquipoId);
+
+            return CreatedAtAction("GetTorneoEquipo", new { id = te.Id }, te);
+        }
+
+        [HttpPut("{id}")]
+        public async Task<IActionResult> PutTorneoEquipo(int id, TorneoEquipo te)
+        {
+            if (id != te.Id)
+                return BadRequest();
+
+            _context.Entry(te).State = EntityState.Modified;
 
             try
             {
@@ -60,40 +73,23 @@ namespace GestionTorneos.API.Controllers
             catch (DbUpdateConcurrencyException)
             {
                 if (!TorneoEquipoExists(id))
-                {
                     return NotFound();
-                }
                 else
-                {
                     throw;
-                }
             }
 
             return NoContent();
         }
 
-        // POST: api/TorneosEquipos
-        // To protect from overposting attacks, see https://go.microsoft.com/fwlink/?linkid=2123754
-        [HttpPost]
-        public async Task<ActionResult<TorneoEquipo>> PostTorneoEquipo(TorneoEquipo torneoEquipo)
-        {
-            _context.TorneosEquipos.Add(torneoEquipo);
-            await _context.SaveChangesAsync();
-
-            return CreatedAtAction("GetTorneoEquipo", new { id = torneoEquipo.Id }, torneoEquipo);
-        }
-
-        // DELETE: api/TorneosEquipos/5
         [HttpDelete("{id}")]
         public async Task<IActionResult> DeleteTorneoEquipo(int id)
         {
-            var torneoEquipo = await _context.TorneosEquipos.FindAsync(id);
-            if (torneoEquipo == null)
-            {
-                return NotFound();
-            }
+            var te = await _context.TorneosEquipos.FindAsync(id);
 
-            _context.TorneosEquipos.Remove(torneoEquipo);
+            if (te == null)
+                return NotFound();
+
+            _context.TorneosEquipos.Remove(te);
             await _context.SaveChangesAsync();
 
             return NoContent();
@@ -101,7 +97,8 @@ namespace GestionTorneos.API.Controllers
 
         private bool TorneoEquipoExists(int id)
         {
-            return _context.TorneosEquipos.Any(e => e.Id == id);
+            return _context.TorneosEquipos.Any(x => x.Id == id);
         }
     }
+
 }

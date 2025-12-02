@@ -18,9 +18,9 @@ namespace GestionTorneosDeportivos.Modelos
         public int JugadorId { get; set; }
 
         //Navegacion
-        public Partido Partido { get; set; }
+        public Partido? Partido { get; set; }
                
-        public Jugador Jugador { get; set; }
+        public Jugador? Jugador { get; set; }
 
         
     }
