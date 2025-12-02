@@ -4,7 +4,7 @@ EXPOSE 10000
 
 FROM mcr.microsoft.com/dotnet/sdk:8.0 AS build
 WORKDIR /src
-COPY ["GestionTorneosDeportivos.Modelos.csproj", "./"]
+COPY ["GestionTorneos.API.csproj", "./"]
 RUN dotnet restore "GestionTorneos.API.csproj"
 COPY . .
 RUN dotnet build "GestionTorneos.API.csproj" -c Release -o /app/build
